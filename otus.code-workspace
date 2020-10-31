@@ -1,0 +1,15 @@
+{
+	"folders": [
+		{
+			"path": ".",
+		},
+		{
+			"path": "k8s_2_homework"
+		}
+	],
+	"settings": {
+		"cSpell.words": [
+			"hello"
+		]
+	}
+}
