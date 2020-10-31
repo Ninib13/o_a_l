@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: k8s-2-hw
+  labels:
+    app: k8s-2-hw
+spec:
+  containers:
+  - name: app
+    image: k8s_2:v17
+    resources:
+      limits:
+        memory: "128Mi"
+        cpu: "500m"
+    ports:
+      - containerPort: 8000

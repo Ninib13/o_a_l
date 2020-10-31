@@ -1,0 +1,12 @@
+apiVersion: skaffold/v2beta8
+kind: Config
+metadata:
+  name: k8s-2-homework
+build:
+  artifacts:
+  - image: k8s_2
+deploy:
+  kubectl:
+    manifests:
+    - deployment/deployment.yaml
+    - deployment/service.yaml
