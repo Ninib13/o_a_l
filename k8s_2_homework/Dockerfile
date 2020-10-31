@@ -18,7 +18,7 @@ LABEL maintainer="Ninib"
 LABEL version="0.3"
 WORKDIR /home/app
 COPY --from=builder /install /usr/local
-COPY . ./
+COPY ./service/ ./service/ 
 RUN pip3 freeze
 EXPOSE 8000/tcp
 ENTRYPOINT gunicorn service:app -b:8000 -w 1 -k eventlet 

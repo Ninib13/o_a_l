@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: app
-        image: k8s_2:v18
+        image: ninib/k8s_2:latest
         resources:
           limits:
             memory: "64Mi"
@@ -25,14 +25,14 @@ spec:
           httpGet:
             port: 8000
             path: /
-          initialDelaySeconds: 10
+          initialDelaySeconds: 20
           periodSeconds: 5
           timeoutSeconds: 2
         readinessProbe:
           httpGet:
             port: 8000
             path: /health
-          initialDelaySeconds: 10
+          initialDelaySeconds: 20
           periodSeconds: 5
           
 

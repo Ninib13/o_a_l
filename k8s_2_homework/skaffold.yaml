@@ -4,7 +4,9 @@ metadata:
   name: k8s-2-homework
 build:
   artifacts:
-  - image: k8s_2
+  - image: ninib/k8s_2
+  local:
+    push: true
 deploy:
   kubectl:
     manifests:

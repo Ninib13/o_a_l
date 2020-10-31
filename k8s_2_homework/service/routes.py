@@ -15,4 +15,4 @@ def health():
 
 @app.route('/version')
 def version():
-    return jsonify(version=3, host=host)
+    return jsonify(version=5, host=host)
