@@ -16,4 +16,4 @@ spec:
           service:
             name: k8s-2-hw-service
             port: 
-              number: 9000
+              number: 8000
