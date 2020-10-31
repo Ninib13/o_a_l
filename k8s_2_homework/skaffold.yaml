@@ -10,3 +10,4 @@ deploy:
     manifests:
     - deployment/deployment.yaml
     - deployment/service.yaml
+    - deployment/ingress.yaml
