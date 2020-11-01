@@ -17,22 +17,22 @@ spec:
         image: ninib/k8s_3:latest
         resources:
           limits:
-            memory: "64Mi"
-            cpu: "100m"
+            memory: "80Mi"
+            cpu: "150m"
         ports:
         - containerPort: 8080
         livenessProbe:
           httpGet:
             port: 8080
             path: /
-          initialDelaySeconds: 30
+          initialDelaySeconds: 10
           periodSeconds: 5
           timeoutSeconds: 2
         readinessProbe:
           httpGet:
             port: 8080
             path: /health
-          initialDelaySeconds: 30
+          initialDelaySeconds: 10
           periodSeconds: 5
           
 
