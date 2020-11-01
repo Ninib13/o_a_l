@@ -1,0 +1,19 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata: 
+  name: k8s-3-hw-ingress
+  annotations:
+    # nginx.ingress.kubernetes.io/use-regex: "true"
+    nginx.ingress.kubernetes.io/rewrite-target: /$2
+spec:
+  rules:
+  - host: "arch.homework"
+    http:
+      paths:
+      - path: "/otusapp/v.zaitsev($|/)(.*)"
+        pathType: Prefix
+        backend:
+          service:
+            name: k8s-3-hw-service
+            port: 
+              number: 8000

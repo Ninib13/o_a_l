@@ -1,0 +1,38 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: k8s-3-hw-deployment
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: k8s-3-hw
+  template:
+    metadata:
+      labels:
+        app: k8s-3-hw
+    spec:
+      containers:
+      - name: app
+        image: ninib/k8s_3:latest
+        resources:
+          limits:
+            memory: "64Mi"
+            cpu: "100m"
+        ports:
+        - containerPort: 8000
+        livenessProbe:
+          httpGet:
+            port: 8000
+            path: /
+          initialDelaySeconds: 20
+          periodSeconds: 5
+          timeoutSeconds: 2
+        readinessProbe:
+          httpGet:
+            port: 8000
+            path: /health
+          initialDelaySeconds: 20
+          periodSeconds: 5
+          
+

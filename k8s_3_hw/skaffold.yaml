@@ -1,0 +1,15 @@
+apiVersion: skaffold/v2beta8
+kind: Config
+metadata:
+  name: k8s-3-homework
+build:
+  artifacts:
+  - image: ninib/k8s_3
+  local:
+    push: true
+deploy:
+  kubectl:
+    manifests:
+    - deployment/deployment.yaml
+    - deployment/service.yaml
+    - deployment/ingress.yaml
