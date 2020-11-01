@@ -5,11 +5,10 @@ metadata:
 build:
   artifacts:
   - image: ninib/k8s_3
-  local:
-    push: true
+    context: flask_app
 deploy:
   kubectl:
     manifests:
     - deployment/deployment.yaml
-    - deployment/service.yaml
     - deployment/ingress.yaml
+    - deployment/service.yaml

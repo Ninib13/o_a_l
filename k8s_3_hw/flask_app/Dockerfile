@@ -1,7 +1,7 @@
 FROM python:3.7-alpine AS base
 
 FROM base as builder
-RUN mkdir /install
+RUN mkdir /install /app
 WORKDIR /install
 RUN apk add --no-cache --virtual build-deps \
     file \ 
@@ -12,13 +12,17 @@ RUN apk add --no-cache --virtual build-deps \
 RUN pip3 install --upgrade pip
 COPY requirements.txt ./
 RUN pip3 install --prefix=/install -r ./requirements.txt 
+WORKDIR /app
+COPY ./app/ ./app/ 
+COPY run.sh .
+RUN chmod +x run.sh
+RUN pip3 freeze
 
 FROM base
 LABEL maintainer="Ninib"
-LABEL version="0.4"
+LABEL version="0.5"
 WORKDIR /home/app
 COPY --from=builder /install /usr/local
-COPY ./service/ ./service/ 
-RUN pip3 freeze
-EXPOSE 8000/tcp
-ENTRYPOINT gunicorn service:app -b:8000 -w 1 -k eventlet 
+COPY --from=builder /app .
+EXPOSE 8080/tcp
+ENTRYPOINT /home/app/run.sh
