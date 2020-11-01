@@ -1,7 +1,7 @@
 apiVersion: skaffold/v2beta8
 kind: Config
 metadata:
-  name: k8s-3-homework
+  name: k8s-3-hw
 build:
   artifacts:
   - image: ninib/k8s_3
