@@ -40,6 +40,18 @@
 
 [тулза для анализа и оптимизации образов](https://github.com/wagoodman/dive)
 
+[prometheus-stack](https://github.com/prometheus-community/helm-charts/tree/main/charts/kube-prometheus-stack)
+
+### Helm (2)
+
+Как поставить и настроить
+
+```bash
+kubectl create serviceaccount tiller --namespace kube-system
+kubectl create clusterrolebinding tiller-role-binding --clusterrole cluster-admin --serviceaccount=kube-system:tiller
+helm init --service-account tiller
+```
+
 ### Minikube
 
 Внутри миникуба есть свой собственный докер и все образы нужно пушить именно туда, а не в локальный.
