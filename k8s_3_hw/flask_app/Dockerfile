@@ -1,22 +1,23 @@
 FROM python:3.7-alpine AS base
+LABEL project_builder=true
 
 FROM base as builder
+LABEL project_builder=true
 RUN mkdir /install /app
 WORKDIR /install
-RUN apk add --no-cache --virtual build-deps \
+COPY requirements.txt ./
+RUN apk add --no-cache --virtual .build-deps \
     file \ 
     make \ 
     gcc \
     musl-dev \ 
-    libffi-dev
-RUN pip3 install --upgrade pip
-COPY requirements.txt ./
-RUN pip3 install --prefix=/install -r ./requirements.txt 
+    libffi-dev \ 
+    && pip3 install --upgrade pip \ 
+    && pip3 install --no-cache-dir --prefix=/install -r ./requirements.txt
 WORKDIR /app
 COPY ./app/ ./app/ 
 COPY run.sh .
 RUN chmod +x run.sh
-RUN pip3 freeze
 
 FROM base
 LABEL maintainer="Ninib"

@@ -38,6 +38,8 @@
 
 [маршрутизация](https://kubernetes.io/docs/concepts/services-networking/ingress/)
 
+[тулза для анализа и оптимизации образов](https://github.com/wagoodman/dive)
+
 ### Minikube
 
 Внутри миникуба есть свой собственный докер и все образы нужно пушить именно туда, а не в локальный.
