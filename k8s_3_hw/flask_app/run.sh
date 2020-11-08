@@ -1,1 +1,1 @@
-exec gunicorn -w 2 -k eventlet -b:8080 'app:create_app()'
+exec gunicorn -w $GUNICORN_WORKERS -k eventlet -b:$FLASK_RUN_PORT 'run:app'
