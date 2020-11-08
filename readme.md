@@ -12,13 +12,17 @@
 
 [Мега-Учебник Flask, Часть 2: Шаблоны (издание 2018)](https://habr.com/ru/post/346340/)
 
-### Conda
+Интерактивный терминал:
 
-Вирт. окружения для питона
+`flask shell`
 
-[docks.conda.io](https://docs.conda.io/projects/conda/en/latest/index.html)
+Создание миграций по обновлённым моделям:
 
-[cheat sheet](./conda-cheatsheet.pdf)
+`flask db migrate -m "posts table"`
+
+Накатывание миграций на бд:
+
+`flask db upgrade`
 
 ### Gunicorn
 
