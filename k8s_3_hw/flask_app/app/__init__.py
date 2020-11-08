@@ -8,7 +8,8 @@ app.config.from_object(Config)
 db = SQLAlchemy(app)
 migrate = Migrate(app, db)
 
-from app import user, system
+from app import user, system, ui
 
 app.register_blueprint(user.bp)
 app.register_blueprint(system.bp)
+app.register_blueprint(ui.bp)

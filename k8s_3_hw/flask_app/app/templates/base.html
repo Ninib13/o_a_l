@@ -9,8 +9,8 @@
     <body>
         <div>
             Microblog:
-            <a href="{{ url_for('user.index') }}">Home</a>
-            <a href="{{ url_for('user.login') }}">Login</a>
+            <a href="{{ url_for('ui.index') }}">Home</a>
+            <a href="{{ url_for('ui.login') }}">Login</a>
         </div>
         <hr>
         {% with messages = get_flashed_messages() %}
