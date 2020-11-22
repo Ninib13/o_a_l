@@ -1,4 +1,4 @@
-apiVersion: networking.k8s.io/v1
+apiVersion: networking.k8s.io/v1beta1
 kind: Ingress
 metadata: 
   name: k8s-2-hw-ingress
@@ -13,7 +13,5 @@ spec:
       - path: "/otusapp/v.zaitsev($|/)(.*)"
         pathType: Prefix
         backend:
-          service:
-            name: k8s-2-hw-service
-            port: 
-              number: 8000
+          serviceName: k8s-2-hw-service
+          servicePort: 8000

@@ -1,0 +1,14 @@
+# yandex cloud k8s lb. 
+# он будет работать вместо ингресса и обычного сервиса(
+apiVersion: v1
+kind: Service
+metadata:
+  name: k8s-2-hw-lb
+spec:
+  ports:
+  - port: 80
+    name: plaintext
+    targetPort: 8000
+  selector:
+    app: k8s-2-hw
+  type: LoadBalancer

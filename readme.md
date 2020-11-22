@@ -11,6 +11,7 @@
 Фреймворк для разработки
 
 [Мега-Учебник Flask, Часть 2: Шаблоны (издание 2018)](https://habr.com/ru/post/346340/)
+[Flask-REST-JSONAPI](https://flask-rest-jsonapi.readthedocs.io/en/latest/quickstart.html)
 
 Интерактивный терминал:
 
