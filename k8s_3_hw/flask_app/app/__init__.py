@@ -5,10 +5,10 @@ from config import Config, configureLogging
 
 app = Flask(__name__, instance_relative_config=True)
 app.config.from_object(Config)
-db = SQLAlchemy(app)
-migrate = Migrate(app, db)
 logger = app.logger
 configureLogging()
+db = SQLAlchemy(app)
+migrate = Migrate(app, db)
 
 from app import user, system, ui
 

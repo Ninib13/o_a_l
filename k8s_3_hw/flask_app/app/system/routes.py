@@ -1,6 +1,7 @@
 from flask import jsonify
 
 from . import bp
+from app import Config
 
 import os
 
@@ -17,3 +18,7 @@ def health():
 @bp.route('/version')
 def version():
     return jsonify(version=6, host=host)
+
+@bp.route('/config')
+def getConfig():
+    return jsonify(some_var=Config.SOME_ENV_VAR, connection=Config.SQLALCHEMY_DATABASE_URI, debug=Config.DEBUG)

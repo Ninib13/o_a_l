@@ -8,7 +8,11 @@ build:
     context: flask_app
 deploy:
   kubectl:
+    flags:
+      global:
+        - --namespace=k8s-3
     manifests:
+    - deployment/app-config.yaml
     - deployment/deployment.yaml
     - deployment/ingress.yaml
     - deployment/service.yaml

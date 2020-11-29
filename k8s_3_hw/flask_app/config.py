@@ -9,9 +9,18 @@ basedir = os.path.split(os.path.abspath(os.path.dirname(__file__)))
 class Config(object):
     SECRET_KEY = os.environ.get('APP_KEY', 'omg, it\'s a secret key!')
     DEBUG = os.environ.get('APP_DEBUG', False)
-    SQLALCHEMY_DATABASE_URI = os.environ.get('DATABASE_URL') or \
-        'sqlite:///' + os.path.join(basedir, 'app.db')
+    if os.environ.get('DATABASE_URL', False):
+        SQLALCHEMY_DATABASE_URI = os.environ.get('DATABASE_URL')
+    elif os.environ.get('DB_HOST', False):
+        connectionStringTemplate = "mysql+mysqlconnector://{DB_USERNAME}:{DB_PASSWORD}@{DB_HOST}:{DB_PORT}/{DB_DATABASE}"
+        SQLALCHEMY_DATABASE_URI = connectionStringTemplate.format(DB_USERNAME=os.environ.get('DB_USERNAME'), DB_PASSWORD=os.environ.get(
+            'DB_PASSWORD'), DB_HOST=os.environ.get('DB_HOST'), DB_PORT=os.environ.get('DB_PORT'), DB_DATABASE=os.environ.get('DB_DATABASE'))
+    else:
+        SQLALCHEMY_DATABASE_URI = 'sqlite:///' + \
+            os.path.join(basedir, 'app.db')
+
     SQLALCHEMY_TRACK_MODIFICATIONS = False
+    SOME_ENV_VAR=os.environ.get('SOME_ENV_VAR', '%not_set%')
 
     # DB_CONNECTION=mysql
     # DB_HOST=127.0.0.1
@@ -21,21 +30,21 @@ class Config(object):
     # DB_PASSWORD=
 
 
-# dictConfig({
-#     'version': 1,
-#     'formatters': {'default': {
-#         'format': '[%(asctime)s] %(levelname)s in %(module)s: %(message)s',
-#     }},
-#     'handlers': {'wsgi': {
-#         'class': 'logging.StreamHandler',
-#         'stream': 'ext://flask.logging.wsgi_errors_stream',
-#         'formatter': 'default'
-#     }},
-#     'root': {
-#         'level': 'INFO',
-#         'handlers': ['wsgi']
-#     }
-# })
+dictConfig({
+    'version': 1,
+    'formatters': {'default': {
+        'format': '[%(asctime)s] [%(process)s] [%(levelname)s] in %(module)s: %(message)s',
+    }},
+    'handlers': {'wsgi': {
+        'class': 'logging.StreamHandler',
+        'stream': 'ext://flask.logging.wsgi_errors_stream',
+        'formatter': 'default'
+    }},
+    'root': {
+        'level': 'INFO',
+        'handlers': ['wsgi']
+    }
+})
 
 
 # class RequestFormatter(logging.Formatter):

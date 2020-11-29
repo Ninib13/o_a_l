@@ -3,7 +3,7 @@ kind: Deployment
 metadata:
   name: k8s-3-hw-deployment
 spec:
-  replicas: 3
+  replicas: 1
   selector:
     matchLabels:
       app: k8s-3-hw
@@ -13,27 +13,66 @@ spec:
         app: k8s-3-hw
     spec:
       containers:
-      - name: app
-        image: ninib/k8s_3:latest
-        resources:
-          limits:
-            memory: "80Mi"
-            cpu: "150m"
-        ports:
-        - containerPort: 8080
-        # см https://habr.com/ru/company/flant/blog/470958/
-        # livenessProbe:
-        #   httpGet:
-        #     port: 8080
-        #     path: /
-        #   initialDecaySeconds: 10
-        #   periodSeconds: 5
-        #   timeoutSeconds: 2
-        readinessProbe:
-          httpGet:
-            port: 8080
-            path: /health
-          initialDelaySeconds: 10
-          periodSeconds: 5
-          
-
+        - name: app
+          image: ninib/k8s_3:latest
+          resources:
+            limits:
+              memory: "256Mi"
+              cpu: "150m"
+          env:
+            - name: DB_DATABASE
+              valueFrom:
+                secretKeyRef: 
+                  name: app-secret
+                  key: DB_DATABASE
+            - name: DB_USERNAME
+              valueFrom:
+                secretKeyRef: 
+                  name: app-secret
+                  key: DB_USERNAME
+            - name: DB_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: app-secret
+                  key: DB_PASSWORD
+            - name: DB_HOST
+              valueFrom:
+                configMapKeyRef: 
+                  name: app-env
+                  key: DB_HOST
+            - name: DB_PORT
+              valueFrom:
+                configMapKeyRef: 
+                  name: app-env
+                  key: DB_PORT
+            - name: GUNICORN_WORKERS
+              valueFrom:
+                configMapKeyRef: 
+                  name: app-env
+                  key: GUNICORN_WORKERS
+            - name: FLASK_RUN_PORT
+              valueFrom:
+                configMapKeyRef: 
+                  name: app-env
+                  key: FLASK_RUN_PORT
+            - name: SOME_ENV_VAR
+              valueFrom:
+                configMapKeyRef: 
+                  name: app-env
+                  key: SOME_ENV_VAR
+          ports:
+            - containerPort: 8080
+          # см https://habr.com/ru/company/flant/blog/470958/
+          # livenessProbe:
+          #   httpGet:
+          #     port: 8080
+          #     path: /
+          #   initialDecaySeconds: 10
+          #   periodSeconds: 5
+          #   timeoutSeconds: 2
+          readinessProbe:
+            httpGet:
+              port: 8080
+              path: /health
+            initialDelaySeconds: 10
+            periodSeconds: 5

@@ -15,13 +15,16 @@ RUN apk add --no-cache --virtual .build-deps \
     && pip3 install --upgrade pip \ 
     && pip3 install --no-cache-dir --prefix=/install -r ./requirements.txt
 WORKDIR /app
-COPY ./app/ ./app/ 
+COPY ./app ./app
+COPY ./migrations ./migrations
+COPY config.py .
+COPY run.py .
 COPY run.sh .
 RUN chmod +x run.sh
 
 FROM base
 LABEL maintainer="Ninib"
-LABEL version="0.5"
+LABEL version="0.6"
 WORKDIR /home/app
 COPY --from=builder /install /usr/local
 COPY --from=builder /app .

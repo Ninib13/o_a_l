@@ -1,0 +1,23 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: app-env
+data:
+  # DB_DATABASE: otus_1
+  # DB_USERNAME: app_user
+  # DB_PASSWORD: fa1aa5936b9aa9abcf8e974232a2d234
+  DB_HOST: mysql-service
+  DB_PORT: "3306"
+  GUNICORN_WORKERS: "3"
+  FLASK_RUN_PORT: "8080"
+  SOME_ENV_VAR: "foo-bar"
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: app-secret
+type: opaque
+data:
+  DB_DATABASE: b3R1c18x
+  DB_USERNAME: YXBwX3VzZXI=
+  DB_PASSWORD: ZmExYWE1OTM2YjlhYTlhYmNmOGU5NzQyMzJhMmQyMzQ=
